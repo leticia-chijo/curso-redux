@@ -1,4 +1,4 @@
-import { FETCH_ERROR, FETCH_REQUEST, FETCH_SUCCESS } from "./pokemonTypes";
+import { FETCH_ERROR, FETCH_REQUEST, FETCH_SUCCESS, SELECT_POKEMON } from "./pokemonTypes";
 import axios from "axios";
 
 export function fetchRequest() {
@@ -11,6 +11,10 @@ export function fetchSuccess(pokemons) {
 
 export function fetchError(error) {
   return { type: FETCH_ERROR, payload: error };
+}
+
+export function selectPokemon(pokemon) {
+  return { type: SELECT_POKEMON, payload: pokemon };
 }
 
 // Async action
