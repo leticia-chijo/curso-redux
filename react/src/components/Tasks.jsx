@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTitle } from "../redux/Title/titleActions";
+import { addTask, removeTask } from "../redux/Task/taskActions";
 
 export default function Tasks() {
   const [titleInput, setTitleInput] = useState("");
   const [taskInput, setTaskInput] = useState("");
+  
   const dispatch = useDispatch();
   const title = useSelector((state) => state.title);
+  const tasks = useSelector((state) => state.tasks);
 
   const onPressAddTitle = () => {
     dispatch(addTitle(titleInput));
@@ -14,11 +17,12 @@ export default function Tasks() {
   };
 
   const onPressAddTask = () => {
-    console.log(taskInput);
+    dispatch(addTask(taskInput));
+    setTaskInput("");
   };
 
   const onPressRemoveTask = (task) => {
-    console.log(task);
+    dispatch(removeTask(task));
   };
 
   return (
@@ -42,9 +46,11 @@ export default function Tasks() {
 
       <h1>{title}</h1>
       <ul>
-        <li>
-          Minha tarefa 1 <button onClick={onPressRemoveTask}>x</button>
-        </li>
+        {tasks.map((task) => (
+          <li key={task}>
+            {task} <button onClick={() => onPressRemoveTask(task)}>x</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
