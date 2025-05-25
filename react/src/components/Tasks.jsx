@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTitle } from "../redux/Title/titleActions";
 
 export default function Tasks() {
   const [titleInput, setTitleInput] = useState("");
   const [taskInput, setTaskInput] = useState("");
+  const dispatch = useDispatch();
+  const title = useSelector((state) => state.title);
 
   const onPressAddTitle = () => {
-    console.log(titleInput);
+    dispatch(addTitle(titleInput));
+    setTitleInput("");
   };
 
   const onPressAddTask = () => {
@@ -35,7 +40,7 @@ export default function Tasks() {
       />
       <button onClick={onPressAddTask}>+</button>
 
-      <h1>Título da minha lista</h1>
+      <h1>{title}</h1>
       <ul>
         <li>
           Minha tarefa 1 <button onClick={onPressRemoveTask}>x</button>

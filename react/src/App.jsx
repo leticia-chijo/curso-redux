@@ -1,9 +1,11 @@
 import Tasks from "./components/Tasks";
+import { Provider } from "react-redux";
+import reduxStore from "./redux/store";
 
 export default function App() {
   return (
-    <div>
+    <Provider store={reduxStore}>
       <Tasks />
-    </div>
+    </Provider>
   );
 }
