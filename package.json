@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/leticia-chijo/curso-redux#readme",
   "dependencies": {
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "redux-logger": "^3.0.6"
   }
 }

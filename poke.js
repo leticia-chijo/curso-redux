@@ -1,4 +1,6 @@
 const redux = require("redux");
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
 
 // State
 const initialState = {
@@ -25,6 +27,7 @@ function fetchError(error) {
   return { type: FETCH_ERROR, payload: error };
 }
 
+
 // Reducer
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -40,10 +43,10 @@ const reducer = (state = initialState, action) => {
 };
 
 // Store
-const store = redux.createStore(reducer);
+const store = redux.createStore(reducer, redux.applyMiddleware(logger));
 console.log("Initial State", store.getState());
 
-const unsubscribe = store.subscribe(() => console.log("Updated State", store.getState()));
+const unsubscribe = store.subscribe(() => {});
 
 // Dispatch das actions
 

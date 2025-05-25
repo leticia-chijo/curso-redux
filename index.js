@@ -1,4 +1,6 @@
 const redux = require("redux");
+const reduxLogger = require("redux-logger");
+const logger = reduxLogger.createLogger();
 
 // State ------------------------------------------------------
 const initialStateTitle = "";
@@ -51,11 +53,11 @@ const rootReducer = redux.combineReducers({
 });
 
 // Store ------------------------------------------------------
-const store = redux.createStore(rootReducer);
+const store = redux.createStore(rootReducer, redux.applyMiddleware(logger));
 
 console.log("Inital state", store.getState());
 
-const unsubscribe = store.subscribe(() => console.log("Updated State", store.getState()));
+const unsubscribe = store.subscribe(() => {});
 
 store.dispatch(addTitle("Lista de Tarefas do dia 25/05"));
 store.dispatch(addTask("Cozinhar Almoço"));
@@ -63,4 +65,4 @@ store.dispatch(addTask("Estudar Redux"));
 store.dispatch(addTask("Costurar botões na camisa"));
 store.dispatch(removeTask("Estudar Redux"));
 
-unsubscribe()
+unsubscribe();
