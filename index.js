@@ -49,3 +49,18 @@ const rootReducer = redux.combineReducers({
   title: reducerTitle,
   tasks: reducerTasks,
 });
+
+// Store ------------------------------------------------------
+const store = redux.createStore(rootReducer);
+
+console.log("Inital state", store.getState());
+
+const unsubscribe = store.subscribe(() => console.log("Updated State", store.getState()));
+
+store.dispatch(addTitle("Lista de Tarefas do dia 25/05"));
+store.dispatch(addTask("Cozinhar Almoço"));
+store.dispatch(addTask("Estudar Redux"));
+store.dispatch(addTask("Costurar botões na camisa"));
+store.dispatch(removeTask("Estudar Redux"));
+
+unsubscribe()
