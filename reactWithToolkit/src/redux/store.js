@@ -5,6 +5,9 @@ const store = configureStore({
   reducer: {
     tasks: tasksReducer,
   },
+  devTools: {
+    name: "TodoList"
+  }
 });
 
 export default store;
