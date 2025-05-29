@@ -10,7 +10,16 @@ const filterSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    toggleCategory: (state, action) => {},
+    toggleCategory: (state, action) => {
+      const category = action.payload;
+      const categoryIndex = state.selectedCategories.indexOf(category);
+
+      if (categoryIndex === -1) {
+        state.selectedCategories.push(category);
+      } else {
+        state.selectedCategories.splice(categoryIndex, 1);
+      }
+    },
     setPriceRange: (state, action) => {},
     setSearchText: (state, action) => {
       state.searchText = action.payload;
