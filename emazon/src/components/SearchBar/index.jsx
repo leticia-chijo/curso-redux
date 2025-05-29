@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function SearchBar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [text, setText] = useState();
+  const [text, setText] = useState("");
 
   const handleSearch = () => {
     navigate("/");
@@ -20,7 +20,7 @@ export default function SearchBar() {
       <Input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && handleSearch}
+        onKeyDown={(e) => e.key === "Enter" && handleSearch()}
       />
       <Button onClick={handleSearch}>
         <Icon src={search} />

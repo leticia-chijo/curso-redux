@@ -10,17 +10,37 @@ import {
   Button,
   ContainerSlider,
 } from "./styled";
-import { selectCategories } from "../../redux/filterSelectors";
-import { toggleCategory } from "../../redux/filterSlice";
+import {
+  selectCategories,
+  selectFilteredProducts,
+  selectPossiblePriceRange,
+} from "../../redux/filterSelectors";
+import { setPriceRange, toggleCategory } from "../../redux/filterSlice";
+import { useEffect } from "react";
 
 export default function FilterBar() {
   const categories = useSelector(selectCategories);
   const selectedCategories = useSelector((state) => state.filters.selectedCategories);
+
+  const [minPrice, maxPrice] = useSelector(selectPossiblePriceRange);
+  const priceRange = useSelector((state) => state.filters.priceRange);
+  const filteredProducts = useSelector(selectFilteredProducts);
+
   const dispatch = useDispatch();
 
   const handleCheck = (category) => {
     dispatch(toggleCategory(category));
   };
+
+  const handlePriceChange = (event, newValue) => {
+    dispatch(setPriceRange(newValue));
+  };
+
+  useEffect(() => {
+    if (priceRange[0] === 0 && priceRange[1] === Infinity && filteredProducts.length > 0) {
+      dispatch(setPriceRange([minPrice, maxPrice]));
+    }
+  }, []);
 
   return (
     <Container>
@@ -34,9 +54,18 @@ export default function FilterBar() {
       ))}
 
       <Title>Preço</Title>
-      <Text>R$20 – R$50</Text>
+      <Text>
+        R${priceRange[0]} – R${priceRange[1]}
+      </Text>
       <ContainerSlider>
-        <RangeSlider value={[20, 50]} color={colors.range} min={0} max={100} sx={{ width: "75%" }} />
+        <RangeSlider
+          value={priceRange}
+          onChange={handlePriceChange}
+          color={colors.range}
+          min={minPrice}
+          max={maxPrice}
+          sx={{ width: "75%" }}
+        />
       </ContainerSlider>
     </Container>
   );

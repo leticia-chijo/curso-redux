@@ -20,7 +20,9 @@ const filterSlice = createSlice({
         state.selectedCategories.splice(categoryIndex, 1);
       }
     },
-    setPriceRange: (state, action) => {},
+    setPriceRange: (state, action) => {
+      state.priceRange = action.payload;
+    },
     setSearchText: (state, action) => {
       state.searchText = action.payload;
     },
