@@ -2,20 +2,20 @@ import AmountCounter from "../AmountCounter";
 import Price from "../Price";
 import { Container, ContainerProduct, ContainerText, Image, Title } from "./styled";
 
-const tshirt = "https://cdn.aboutstatic.com/file/images/341b3edb7974a23f568ba95a2c003842.png";
+export default function CartListItem({ product }) {
+  const { id, title, price, description, category, image, amount } = product;
 
-export default function CartListItem() {
   return (
     <Container>
       <ContainerProduct>
-        <Image src={tshirt} />
+        <Image src={image} />
         <ContainerText>
-          <Title>Camiseta Preta Bonita</Title>
+          <Title>{title}</Title>
           <p>Em estoque</p>
-          <AmountCounter />
+          <AmountCounter product={product} />
         </ContainerText>
       </ContainerProduct>
-      <Price />
+      <Price price={price} />
     </Container>
   );
 }

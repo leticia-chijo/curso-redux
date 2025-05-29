@@ -4,8 +4,8 @@ import minus from "../../assets/minus.png";
 import trash from "../../assets/trash-can.png";
 import { useState } from "react";
 
-export default function AmountCounter() {
-  const [amount, setAmount] = useState(1);
+export default function AmountCounter({ product }) {
+  const [amount, setAmount] = useState(product.amount);
 
   return (
     <Container>
