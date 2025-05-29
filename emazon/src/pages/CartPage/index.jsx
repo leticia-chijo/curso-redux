@@ -3,9 +3,11 @@ import CartListItem from "../../components/CartListItem";
 import Price from "../../components/Price";
 import { ItemsContainer, PageContainer } from "./style";
 import EmptyCart from "../../components/EmptyCart";
+import { selectCartTotal } from "../../redux/cartSelectors";
 
 export default function CartPage() {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const total = useSelector(selectCartTotal);
 
   return (
     <PageContainer>
@@ -17,7 +19,7 @@ export default function CartPage() {
         ))}
         <div>
           <p>Total: </p>
-          <Price />
+          <Price price={total} />
         </div>
       </ItemsContainer>
     </PageContainer>

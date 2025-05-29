@@ -15,7 +15,7 @@ export default function CartListItem({ product }) {
           <AmountCounter product={product} />
         </ContainerText>
       </ContainerProduct>
-      <Price price={price} />
+      <Price price={price * amount} />
     </Container>
   );
 }
