@@ -4,10 +4,12 @@ import ProductListItem from "../../components/ProductListItem";
 import { PageContainer, ListContainer } from "./styled";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/productSlice";
+import { selectFilteredProducts } from "../../redux/filterSelectors";
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const filteredProducts = useSelector(selectFilteredProducts);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -25,7 +27,7 @@ export default function ProductsPage() {
     <PageContainer>
       <FilterBar />
       <ListContainer>
-        {products.list.map((prod) => (
+        {filteredProducts.map((prod) => (
           <ProductListItem key={prod.id} product={prod} />
         ))}
       </ListContainer>
